@@ -11,7 +11,6 @@
 @implementation Recorder {
     AVCaptureSession *_captureSession;
     AVCaptureMovieFileOutput *_movieFileOutput;
-    NSTimer *_timer;
 }
 
 - (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen
