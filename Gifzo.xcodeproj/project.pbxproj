@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		095EB75A174E3C8400176B92 /* Uploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 095EB759174E3C8400176B92 /* Uploader.m */; };
+		095EB75D174E3D7D00176B92 /* GifzoAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 095EB75C174E3D7D00176B92 /* GifzoAPIClient.m */; };
 		253BCB8B188B46E4B52B2AD4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 182E90E90D794196BED5633B /* libPods.a */; };
 		5534651B1743FC9400DBF01C /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5534651A1743FC9400DBF01C /* icon.icns */; };
 		55354AF7173A82F500BEEBA6 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55354AF6173A82F500BEEBA6 /* Recorder.m */; };
@@ -23,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		095EB758174E3C8400176B92 /* Uploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uploader.h; sourceTree = "<group>"; };
+		095EB759174E3C8400176B92 /* Uploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Uploader.m; sourceTree = "<group>"; };
+		095EB75B174E3D7D00176B92 /* GifzoAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifzoAPIClient.h; sourceTree = "<group>"; };
+		095EB75C174E3D7D00176B92 /* GifzoAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifzoAPIClient.m; sourceTree = "<group>"; };
 		182E90E90D794196BED5633B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5534651A1743FC9400DBF01C /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		55354AF5173A82F500BEEBA6 /* Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
@@ -111,6 +117,10 @@
 				55E40D41173218E0008F31EC /* DrawMouseBoxView.m */,
 				55354AF5173A82F500BEEBA6 /* Recorder.h */,
 				55354AF6173A82F500BEEBA6 /* Recorder.m */,
+				095EB758174E3C8400176B92 /* Uploader.h */,
+				095EB759174E3C8400176B92 /* Uploader.m */,
+				095EB75B174E3D7D00176B92 /* GifzoAPIClient.h */,
+				095EB75C174E3D7D00176B92 /* GifzoAPIClient.m */,
 				55E40D2A17321222008F31EC /* AppDelegate.h */,
 				55E40D2B17321222008F31EC /* AppDelegate.m */,
 				555F1F1E173BB15100EBDE0C /* BorderlessWindow.h */,
@@ -237,6 +247,8 @@
 				55E40D42173218E0008F31EC /* DrawMouseBoxView.m in Sources */,
 				55354AF7173A82F500BEEBA6 /* Recorder.m in Sources */,
 				555F1F20173BB15100EBDE0C /* BorderlessWindow.m in Sources */,
+				095EB75A174E3C8400176B92 /* Uploader.m in Sources */,
+				095EB75D174E3D7D00176B92 /* GifzoAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

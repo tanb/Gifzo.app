@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BorderlessWindow.h"
+#import "Uploader.h"
 
 @implementation AppDelegate {
     NSMutableArray *_windows;
@@ -102,15 +103,17 @@
                 break;
             case AVAssetExportSessionStatusFailed:
                 NSLog(@"Export failed: %@", [[exportSession error] localizedDescription]);
+
+                [NSApp terminate:nil];
                 break;
             case AVAssetExportSessionStatusCancelled:
                 NSLog(@"Export canceled");
+
+                [NSApp terminate:nil];
                 break;
             default:
                 break;
         }
-
-        [NSApp terminate:nil];
     }];
 }
 
@@ -125,36 +128,19 @@
 // mp4ファイルをmultipart uploadする
 - (void)upload:(NSURL *)videoURL
 {
-    NSString *production_url = @"http://gifzo.net/";
-    NSURL *uploadURL = [NSURL URLWithString:production_url];
+    [[[Uploader alloc] init] uploadVideo:videoURL completion:^(NSURL *gifURL, NSError *error) {
+        if (gifURL) {
+            [self copyToPasteboard:[gifURL absoluteString]];
+            [[NSWorkspace sharedWorkspace] openURL:gifURL];
 
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:uploadURL];
-    [request setHTTPMethod:@"POST"];
+            [NSApp terminate:nil];
+        }
+        else if (error) {
+            NSLog(@"Cannot upload file: %@", [error description]);
 
-    NSMutableData *body = [NSMutableData data];
-
-    NSString *boundary = @"--------------------------298e6779c7a9";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-
-    NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
-
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Disposition: form-data; name=\"data\"; filename=\"gifzo.mp4\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:videoData];
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-
-    [request setHTTPBody:body];
-
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-
-    NSURL *gifURL = [NSURL URLWithString:returnString];
-
-    [self copyToPasteboard:returnString];
-
-    [[NSWorkspace sharedWorkspace] openURL:gifURL];
+            [NSApp terminate:nil];
+        }
+    }];
 }
 
 - (void)copyToPasteboard:(NSString *)urlString
