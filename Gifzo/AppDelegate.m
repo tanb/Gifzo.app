@@ -39,14 +39,14 @@
 - (IBAction)startCropRect:(id)sender
 {
     _windows = [NSMutableArray array];
-
+    
     for (NSScreen *screen in [NSScreen screens]) {
         NSRect frame = [screen frame];
         NSWindow *window = [[BorderlessWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
         [window setBackgroundColor:[NSColor clearColor]];
         [window setOpaque:NO];
         [window setLevel:kShadyWindowLevel];
-        [window setReleasedWhenClosed:YES];
+        [window setReleasedWhenClosed:NO];
 
         DrawMouseBoxView *drawMouseBoxView = [[DrawMouseBoxView alloc] initWithFrame:frame];
         drawMouseBoxView.screen = screen;
@@ -75,6 +75,7 @@
 - (void)recorder:(Recorder *)recorder didRecordedWithOutputURL:(NSURL *)outputFileURL
 {
     [_windows makeObjectsPerformSelector:@selector(close)];
+    _windows = @[].mutableCopy;
 
     NSString *tempName = [self generateTempName];
     NSURL *tempURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mp4"]];
