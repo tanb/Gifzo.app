@@ -17,7 +17,9 @@
 {
     _captureSession = [[AVCaptureSession alloc] init];
 
+    [_captureSession beginConfiguration];
     _captureSession.sessionPreset = AVCaptureSessionPresetHigh;
+    [_captureSession commitConfiguration];
 
     NSDictionary *screenDictionary = [screen deviceDescription];
     NSNumber *screenID = [screenDictionary objectForKey:@"NSScreenNumber"];
