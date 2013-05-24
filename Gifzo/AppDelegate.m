@@ -36,7 +36,7 @@
 
 #define kShadyWindowLevel   (NSScreenSaverWindowLevel + 1)
 
-- (void)startCropRect
+- (IBAction)startCropRect:(id)sender
 {
     _windows = [NSMutableArray array];
 
