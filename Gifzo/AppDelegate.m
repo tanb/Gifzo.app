@@ -13,7 +13,6 @@
 @implementation AppDelegate {
     NSMutableArray *_windows;
     BOOL _isRecording, _recordingDidFinished;
-    NSURL *_tempURL;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -22,16 +21,15 @@
     self.recorder.delegate = self;
     _isRecording = NO;
 
-    // movファイル書き出し用のテンポラリディレクトリの初期化
-    NSString *tempName = [self generateTempName];
-    _tempURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mov"]];
-
     [self startCropRect];
 }
 
 - (void)startRecording:(NSRect)cropRect screen:(NSScreen *)screen
 {
-    [self.recorder startRecordingWithOutputURL:_tempURL croppingRect:cropRect screen:screen];
+    NSString *tempName = [self generateTempName];
+    NSURL *movURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mov"]];
+
+    [self.recorder startRecordingWithOutputURL:movURL croppingRect:cropRect screen:screen];
 
     _isRecording = YES;
 }
@@ -76,44 +74,22 @@
 #pragma mark - RecorderDelegate
 - (void)recorder:(Recorder *)recorder didRecordedWithOutputURL:(NSURL *)outputFileURL
 {
-    for (NSWindow *window in _windows) {
-        [window close];
-    }
-
-    [self convertFromMOVToMP4:outputFileURL];
-}
-
-- (void)convertFromMOVToMP4:(NSURL *)outputFileURL
-{
-    AVAsset *asset = [AVAsset assetWithURL:outputFileURL];
-    AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:asset presetName:AVAssetExportPresetPassthrough];
+    [_windows makeObjectsPerformSelector:@selector(close)];
 
     NSString *tempName = [self generateTempName];
+    NSURL *tempURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mp4"]];
 
-    exportSession.outputURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mp4"]];
-    exportSession.outputFileType = AVFileTypeMPEG4;
-
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        switch ([exportSession status]) {
-            case AVAssetExportSessionStatusCompleted:
-                NSLog(@"Export completed: %@", exportSession.outputURL);
-
-                [self upload:exportSession.outputURL];
-
-                break;
-            case AVAssetExportSessionStatusFailed:
-                NSLog(@"Export failed: %@", [[exportSession error] localizedDescription]);
-
-                [NSApp terminate:nil];
-                break;
-            case AVAssetExportSessionStatusCancelled:
-                NSLog(@"Export canceled");
-
-                [NSApp terminate:nil];
-                break;
-            default:
-                break;
+    Uploader *uploader = [[Uploader alloc] init];
+    [uploader uploadVideoWithURL:outputFileURL temporaryFileURL:tempURL completion:^(NSURL *gifURL, NSError *error) {
+        if (gifURL) {
+            [self copyToPasteboard:[gifURL absoluteString]];
+            [[NSWorkspace sharedWorkspace] openURL:gifURL];
         }
+        else if (error) {
+            NSLog(@"Error : %@", error);
+        }
+
+        [NSApp terminate:nil];
     }];
 }
 
@@ -123,24 +99,6 @@
     NSString *tempName = [[NSString alloc] initWithBytesNoCopy:tempNameBytes length:strlen(tempNameBytes) encoding:NSUTF8StringEncoding freeWhenDone:YES];
 
     return tempName;
-}
-
-// mp4ファイルをmultipart uploadする
-- (void)upload:(NSURL *)videoURL
-{
-    [[[Uploader alloc] init] uploadVideo:videoURL completion:^(NSURL *gifURL, NSError *error) {
-        if (gifURL) {
-            [self copyToPasteboard:[gifURL absoluteString]];
-            [[NSWorkspace sharedWorkspace] openURL:gifURL];
-
-            [NSApp terminate:nil];
-        }
-        else if (error) {
-            NSLog(@"Cannot upload file: %@", [error description]);
-
-            [NSApp terminate:nil];
-        }
-    }];
 }
 
 - (void)copyToPasteboard:(NSString *)urlString

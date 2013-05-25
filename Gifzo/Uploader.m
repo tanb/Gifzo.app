@@ -6,12 +6,41 @@
 //  Copyright (c) 2013年 Kazato Sugimoto. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "Uploader.h"
 
 #import "GifzoAPIClient.h"
 #import "AFHTTPRequestOperation.h"
 
 @implementation Uploader
+
+- (void)uploadVideoWithURL:(NSURL *)videoURL temporaryFileURL:(NSURL *)tempFileURL completion:(void (^) (NSURL *gifURL, NSError *error))completionBlock
+{
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:asset presetName:AVAssetExportPresetPassthrough];
+
+    exportSession.outputURL = tempFileURL;
+    exportSession.outputFileType = AVFileTypeMPEG4;
+
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        switch ([exportSession status]) {
+            case AVAssetExportSessionStatusCompleted:
+                [self uploadVideo:exportSession.outputURL completion:completionBlock];
+
+                break;
+            case AVAssetExportSessionStatusFailed:
+                completionBlock(nil, exportSession.error);
+
+                break;
+            case AVAssetExportSessionStatusCancelled:
+                completionBlock(nil, nil);
+
+                break;
+            default:
+                break;
+        }
+    }];
+}
 
 - (void)uploadVideo:(NSURL *)videoURL completion:(void (^) (NSURL *gifURL, NSError *error))completionBlock
 {

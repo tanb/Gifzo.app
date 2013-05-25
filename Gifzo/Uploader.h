@@ -10,5 +10,6 @@
 
 @interface Uploader : NSObject
 
-- (void)uploadVideo:(NSURL *)videoURL completion:(void (^)(NSURL *, NSError *))completionBlock;
+- (void)uploadVideoWithURL:(NSURL *)videoURL temporaryFileURL:(NSURL *)tempFileURL completion:(void (^)(NSURL *, NSError *))completionBlock;
+
 @end
