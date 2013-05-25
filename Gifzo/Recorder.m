@@ -81,4 +81,9 @@
     [_movieFileOutput stopRecording];
 }
 
+- (BOOL)isRecording
+{
+    return [_movieFileOutput isRecording];
+}
+
 @end

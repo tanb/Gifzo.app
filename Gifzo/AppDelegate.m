@@ -12,14 +12,12 @@
 
 @implementation AppDelegate {
     NSMutableArray *_windows;
-    BOOL _isRecording, _recordingDidFinished;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.recorder = [[Recorder alloc] init];
     self.recorder.delegate = self;
-    _isRecording = NO;
 
     [self startCropRect];
 }
@@ -61,11 +59,10 @@
 #pragma mark - DrawMouseBoxViewDelegate
 - (void)startRecordingKeyDidPressedInView:(DrawMouseBoxView *)view withRect:(NSRect)rect screen:(NSScreen *)screen
 {
-    if (_recordingDidFinished) return;
+    if ([_windows count] < 1) return;
 
-    if (_isRecording) {
+    if ([self.recorder isRecording]) {
         [self.recorder finishRecording];
-        _recordingDidFinished = YES;
     } else {
         [self startRecording:rect screen:screen];
     }
