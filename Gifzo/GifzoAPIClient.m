@@ -9,6 +9,7 @@
 #import "GifzoAPIClient.h"
 #import "AFHTTPRequestOperation.h"
 
+static NSString * const kGifzoAPIBaseURLStringKey = @"url";
 static NSString * const kGifzoAPIBaseURLString = @"http://gifzo.net/";
 
 @implementation GifzoAPIClient
@@ -18,13 +19,16 @@ static NSString * const kGifzoAPIBaseURLString = @"http://gifzo.net/";
     static GifzoAPIClient *sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedClient = [[GifzoAPIClient alloc] initWithBaseURL:[NSURL URLWithString:kGifzoAPIBaseURLString]];
+        [self setupUserDefaults];
+
+        sharedClient = [[GifzoAPIClient alloc] initWithBaseURL:[GifzoAPIClient serverURL]];
     });
 
     return sharedClient;
 }
 
-- (id)initWithBaseURL:(NSURL *)url {
+- (id)initWithBaseURL:(NSURL *)url
+{
     self = [super initWithBaseURL:url];
     if (!self) {
         return nil;
@@ -33,6 +37,23 @@ static NSString * const kGifzoAPIBaseURLString = @"http://gifzo.net/";
     [self registerHTTPOperationClass:[AFHTTPRequestOperation class]];
 
     return self;
+}
+
+#pragma mark - NSUserDefaults
+
++ (void)setupUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *initialValueDict = @{
+            kGifzoAPIBaseURLStringKey : kGifzoAPIBaseURLString
+    };
+    [defaults registerDefaults:initialValueDict];
+}
+
++ (NSURL *)serverURL
+{
+    NSString *serverURLString = [[NSUserDefaults standardUserDefaults] objectForKey:kGifzoAPIBaseURLStringKey];
+    return [NSURL URLWithString:serverURLString];
 }
 
 @end

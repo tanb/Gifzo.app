@@ -149,4 +149,5 @@
     [pasteboard declareTypes:[NSArray arrayWithObjects:NSPasteboardTypeString, nil] owner:nil];
     [pasteboard setString:urlString forType:NSPasteboardTypeString];
 }
+
 @end
