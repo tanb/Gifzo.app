@@ -106,4 +106,27 @@
     [pasteboard setString:urlString forType:NSPasteboardTypeString];
 }
 
+- (NSUserDefaults *)setupUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *initialValueDict = @{
+        @"url" : @"http://gifzo.net/"
+    };
+    
+    [defaults registerDefaults:initialValueDict];
+    
+    return defaults;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    // for disable menu item. if selection window exists, don't respond.
+    if (aSelector == @selector(startCropRect:) && [_windows count] > 0) {
+        return NO;
+    }
+
+    return [super respondsToSelector:aSelector];
+}
+
 @end
