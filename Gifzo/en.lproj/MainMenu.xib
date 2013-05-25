@@ -136,7 +136,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="421108320">
 									<reference key="NSMenu" ref="358580220"/>
-									<string key="NSTitle">Crop Screen</string>
+									<string key="NSTitle">Select Recording Area</string>
 									<string key="NSKeyEquiv">c</string>
 									<int key="NSKeyEquivModMask">524288</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -420,6 +420,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">startCropRect:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">startCropRect:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">startCropRect:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppDelegate.h</string>
