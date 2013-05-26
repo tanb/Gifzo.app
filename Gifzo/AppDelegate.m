@@ -19,7 +19,7 @@
     self.recorder = [[Recorder alloc] init];
     self.recorder.delegate = self;
 
-    [self startCropRect];
+    [self startCropRect:nil];
 }
 
 - (void)startRecording:(NSRect)cropRect screen:(NSScreen *)screen
@@ -28,8 +28,6 @@
     NSURL *movURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mov"]];
 
     [self.recorder startRecordingWithOutputURL:movURL croppingRect:cropRect screen:screen];
-
-    _isRecording = YES;
 }
 
 #define kShadyWindowLevel   (NSScreenSaverWindowLevel + 1)
@@ -85,9 +83,8 @@
         }
         else if (error) {
             NSLog(@"Error : %@", error);
+            [NSApp terminate:nil];
         }
-
-        [NSApp terminate:nil];
     }];
 }
 
