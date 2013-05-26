@@ -11,14 +11,15 @@
 @implementation Recorder {
     AVCaptureSession *_captureSession;
     AVCaptureMovieFileOutput *_movieFileOutput;
-    NSTimer *_timer;
 }
 
 - (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen
 {
     _captureSession = [[AVCaptureSession alloc] init];
 
+    [_captureSession beginConfiguration];
     _captureSession.sessionPreset = AVCaptureSessionPresetHigh;
+    [_captureSession commitConfiguration];
 
     NSDictionary *screenDictionary = [screen deviceDescription];
     NSNumber *screenID = [screenDictionary objectForKey:@"NSScreenNumber"];
