@@ -31,7 +31,8 @@
 - (void)keyDown:(NSEvent *)theEvent
 {
     if ([theEvent keyCode] == ESC_KEY_CODE) {
-        [NSApp terminate:nil];
+        [self.delegate didPressEscapeKey];
+        return;
     }
 
     if (!_isSelecting) return;
