@@ -18,8 +18,13 @@
 {
     self.recorder = [[Recorder alloc] init];
     self.recorder.delegate = self;
-
     [self startCropRect:nil];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+    [self startCropRect:nil];
+    return YES;
 }
 
 - (void)startRecording:(NSRect)cropRect screen:(NSScreen *)screen
@@ -55,6 +60,13 @@
 }
 
 #pragma mark - DrawMouseBoxViewDelegate
+- (void)didPressEscapeKey
+{
+    [_windows makeObjectsPerformSelector:@selector(close)];
+    _windows = @[].mutableCopy;
+    [self.recorder cancelRecording];
+}
+
 - (void)startRecordingKeyDidPressedInView:(DrawMouseBoxView *)view withRect:(NSRect)rect screen:(NSScreen *)screen
 {
     if ([_windows count] < 1) return;
