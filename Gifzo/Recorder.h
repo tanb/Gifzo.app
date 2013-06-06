@@ -22,5 +22,6 @@
 
 - (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen;
 - (void)finishRecording;
+- (void)cancelRecording;
 - (BOOL)isRecording;
 @end

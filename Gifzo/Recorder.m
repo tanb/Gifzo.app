@@ -7,6 +7,10 @@
 //
 
 #import "Recorder.h"
+@interface Recorder ()
+@property (atomic) BOOL cancel;
+
+@end
 
 @implementation Recorder {
     AVCaptureSession *_captureSession;
@@ -15,6 +19,7 @@
 
 - (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen
 {
+    self.cancel = NO;
     _captureSession = [[AVCaptureSession alloc] init];
 
     [_captureSession beginConfiguration];
@@ -56,6 +61,8 @@
     [_captureSession stopRunning];
     _captureSession = nil;
 
+    if (self.cancel) return;
+    
     if (error) {
         NSLog(@"Did finish recording to %@ due to error %@", [outputFileURL description], [error description]);
 
@@ -78,6 +85,13 @@
 {
     NSLog(@"finish recording");
 
+    [_movieFileOutput stopRecording];
+}
+
+- (void)cancelRecording
+{
+    NSLog(@"cancel recording");
+    self.cancel = YES;
     [_movieFileOutput stopRecording];
 }
 
