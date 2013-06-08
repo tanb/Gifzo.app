@@ -47,7 +47,9 @@ static NSString * const kGifzoAPIBaseURLString = @"http://gifzo.net/";
     NSDictionary *initialValueDict = @{
             kGifzoAPIBaseURLStringKey : kGifzoAPIBaseURLString
     };
-    [defaults registerDefaults:initialValueDict];
+    
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [defaults setPersistentDomain:initialValueDict forName:appDomain];
 }
 
 + (NSURL *)serverURL
