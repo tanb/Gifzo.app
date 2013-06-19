@@ -7,26 +7,26 @@ http://gifzo.net/
 
 ### CocoaPods
 
-1. Install CocoaPods at first time
+1\. Install CocoaPods at first time
 
 ```
 $ [sudo] gem install cocoapods
 $ pod setup
 ```
 
-2. Install pods for resolve dependencies
+2\. Install pods for resolve dependencies
 
 ```
 $ pod install
 ```
 
-3. Open `.xcworkspace` file
+3\. Open `.xcworkspace` file
 
 ```
 $ open Gifzo.xcworkspace
 ```
 
-4. Enjoy!
+4\. Enjoy!
 
 ## Tips
 ### upload to your server
