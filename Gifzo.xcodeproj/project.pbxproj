@@ -14,6 +14,7 @@
 		55354AF7173A82F500BEEBA6 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55354AF6173A82F500BEEBA6 /* Recorder.m */; };
 		55354AFE173A8D2200BEEBA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */; };
 		555F1F20173BB15100EBDE0C /* BorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 555F1F1F173BB15100EBDE0C /* BorderlessWindow.m */; };
+		5561B6CA1772DE91004E5707 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5561B6C91772DE91004E5707 /* CoreMedia.framework */; };
 		55E40D1917321222008F31EC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E40D1817321222008F31EC /* Cocoa.framework */; };
 		55E40D2317321222008F31EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E40D2117321222008F31EC /* InfoPlist.strings */; };
 		55E40D2517321222008F31EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D2417321222008F31EC /* main.m */; };
@@ -36,6 +37,7 @@
 		55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		555F1F1E173BB15100EBDE0C /* BorderlessWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderlessWindow.h; sourceTree = "<group>"; };
 		555F1F1F173BB15100EBDE0C /* BorderlessWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderlessWindow.m; sourceTree = "<group>"; };
+		5561B6C91772DE91004E5707 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		55E40D1417321222008F31EC /* Gifzo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gifzo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E40D1817321222008F31EC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55E40D1B17321222008F31EC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5561B6CA1772DE91004E5707 /* CoreMedia.framework in Frameworks */,
 				55354AFE173A8D2200BEEBA6 /* AVFoundation.framework in Frameworks */,
 				55E40D1917321222008F31EC /* Cocoa.framework in Frameworks */,
 				55F348A3174AC8F80086B4AE /* Carbon.framework in Frameworks */,
@@ -91,6 +94,7 @@
 		55E40D1717321222008F31EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5561B6C91772DE91004E5707 /* CoreMedia.framework */,
 				55F348A1174AC8D70086B4AE /* Carbon.framework */,
 				55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */,
 				55E40D1817321222008F31EC /* Cocoa.framework */,
