@@ -2,8 +2,8 @@
 //  AppDelegate.h
 //  Gifzo
 //
-//  Created by zat on 13/05/02.
-//  Copyright (c) 2013年 zat. All rights reserved.
+//  Created by Kazato Sugimoto on 13/05/02.
+//  Copyright (c) 2013年 Kazato Sugimoto. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

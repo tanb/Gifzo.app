@@ -3,7 +3,7 @@
 //  Gifzo
 //
 //  Created by uiureo on 13/05/02.
-//  Copyright (c) 2013年 uiureo. All rights reserved.
+//  Copyright (c) 2013年 Kazato Sugimoto. All rights reserved.
 //
 
 #import "AppDelegate.h"
