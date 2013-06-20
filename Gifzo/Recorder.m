@@ -2,8 +2,8 @@
 //  Recorder.m
 //  Gifzo
 //
-//  Created by uiureo on 13/05/08.
-//  Copyright (c) 2013年 uiureo. All rights reserved.
+//  Created by Kazato Sugimoto on 13/05/08.
+//  Copyright (c) 2013年 Kazato Sugimoto. All rights reserved.
 //
 
 #import "Recorder.h"

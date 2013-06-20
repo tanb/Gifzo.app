@@ -205,6 +205,8 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
 
 - (void)resetCursorRects
 {
+    [self discardCursorRects];
+    
     if (_selectionDidFinished) return;
     [self addCursorRect:[self frame] cursor:[NSCursor crosshairCursor]];
 }
