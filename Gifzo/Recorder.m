@@ -29,7 +29,7 @@
     AVCaptureScreenInput *input = [[AVCaptureScreenInput alloc] initWithDisplayID:displayID];
     [input setCropRect:NSRectToCGRect(rect)];
     
-    int32_t MAX_FRAME_RATE = 50;
+    int32_t MAX_FRAME_RATE = 30;
     input.minFrameDuration = CMTimeMake(1, MAX_FRAME_RATE);
 
     if ([_captureSession canAddInput:input]) {
